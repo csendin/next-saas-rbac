@@ -16,12 +16,17 @@ export async function createAccount(app: FastifyInstance) {
                     name: z.string(),
                     email: z.string().email(),
                     password: z.string().min(6),
-                    avatarUrl: z.string().url().nullable(),
                 }),
+                response: {
+                    201: z.null(),
+                    400: z.object({
+                        message: z.string(),
+                    }),
+                },
             },
         },
         async (request, reply) => {
-            const { name, email, password, avatarUrl } = request.body
+            const { name, email, password } = request.body
 
             const userWithSameEmail = await prisma.user.findUnique({
                 where: { email },
@@ -31,6 +36,15 @@ export async function createAccount(app: FastifyInstance) {
                 return reply.status(400).send({ message: 'User with same e-mail already exists.' })
             }
 
+            const [, domain] = email.split('@')
+
+            const autoJoinOrganization = await prisma.organization.findUnique({
+                where: {
+                    domain,
+                    attachUsersByDomain: true,
+                },
+            })
+
             const hashedPassword = await hash(password, 6)
 
             await prisma.user.create({
@@ -38,7 +52,9 @@ export async function createAccount(app: FastifyInstance) {
                     name,
                     email,
                     password: hashedPassword,
-                    avatarUrl,
+                    memberOn: autoJoinOrganization
+                        ? { create: { organizationId: autoJoinOrganization.id } }
+                        : undefined,
                 },
             })
 

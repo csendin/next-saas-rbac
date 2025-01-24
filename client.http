@@ -1,4 +1,5 @@
 @baseUrl = http://localhost:3333
+@token = {{authenticate.response.body.accessToken}}
 
 # @name create_account
 POST {{baseUrl}}/users
@@ -6,7 +7,24 @@ Content-Type: application/json
 
 {
     "name": "Caio Sendin",
-    "email": "caio@email.com",
-    "password": "123456",
-    "avatarUrl": "https://github.com/csendin.png"
+    "email": "caio@acme.com",
+    "password": "123456"
 }
+
+###
+
+# @name authenticate
+POST {{baseUrl}}/sessions/password
+Content-Type: application/json
+
+{
+    "email": "caio@acme.com",
+    "password": "123456"
+}
+
+###
+
+# @name get_profile
+GET {{baseUrl}}/profile
+Content-Type: application/json
+Authorization: Bearer {{token}}
