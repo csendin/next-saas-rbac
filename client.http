@@ -19,7 +19,7 @@ Content-Type: application/json
 
 {
     "email": "caio@acme.com",
-    "password": "123456"
+    "password": "000000"
 }
 
 ###
@@ -28,3 +28,24 @@ Content-Type: application/json
 GET {{baseUrl}}/profile
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+###
+
+# @name request_password_recover
+POST {{baseUrl}}/password/recover
+Content-Type: application/json
+
+{
+    "email": "caio@acme.com"
+}
+
+###
+
+# @name reset_password
+POST {{baseUrl}}/password/reset
+Content-Type: application/json
+
+{
+    "code": "10f6b166-4624-45cf-a33f-7a94fa818d78",
+    "password": "000000"
+}
