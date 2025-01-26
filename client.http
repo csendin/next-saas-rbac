@@ -24,6 +24,16 @@ Content-Type: application/json
 
 ###
 
+# @name authenticate_with_github
+POST {{baseUrl}}/sessions/github
+Content-Type: application/json
+
+{
+    "code": "385da2d63d4b0542ccd0"
+}
+
+###
+
 # @name get_profile
 GET {{baseUrl}}/profile
 Content-Type: application/json
