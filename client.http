@@ -79,3 +79,17 @@ Authorization: Bearer {{token}}
 GET {{baseUrl}}/organization/ascombet/membership
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+###
+
+# @name get_organization
+GET {{baseUrl}}/organizations/ascombet
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# @name get_organizations
+GET {{baseUrl}}/organizations
+Content-Type: application/json
+Authorization: Bearer {{token}}
