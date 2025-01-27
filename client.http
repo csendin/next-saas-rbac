@@ -6,8 +6,8 @@ POST {{baseUrl}}/users
 Content-Type: application/json
 
 {
-    "name": "Caio Sendin",
-    "email": "caio@acme.com",
+    "name": "Lucas Diniz",
+    "email": "lucasdiniz@gmail.com",
     "password": "123456"
 }
 
@@ -18,8 +18,8 @@ POST {{baseUrl}}/sessions/password
 Content-Type: application/json
 
 {
-    "email": "caio@acme.com",
-    "password": "000000"
+    "email": "lucasdiniz@gmail.com",
+    "password": "123456"
 }
 
 ###
@@ -59,3 +59,23 @@ Content-Type: application/json
     "code": "10f6b166-4624-45cf-a33f-7a94fa818d78",
     "password": "000000"
 }
+
+###
+
+# @name create_organization
+POST {{baseUrl}}/organizations
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Ascombet",
+    "domain": "ascombet.com.br",
+    "attachUsersByDomain": true
+}
+
+###
+
+# @name get_membership
+GET {{baseUrl}}/organization/ascombet/membership
+Content-Type: application/json
+Authorization: Bearer {{token}}
