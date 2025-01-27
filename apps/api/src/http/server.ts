@@ -5,6 +5,8 @@ import { fastifySwaggerUi } from '@fastify/swagger-ui'
 import { fastify } from 'fastify'
 import { ZodTypeProvider, jsonSchemaTransform, serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod'
 
+import { env } from '@saas/env'
+
 import { errorHandler } from './error-handler'
 import { authenticateWithGithub } from './routes/auth/authenticate-with-github'
 import { authenticateWithPassword } from './routes/auth/authenticate-with-password'
@@ -27,6 +29,15 @@ app.register(fastifySwagger, {
             description: 'Full-stack SaaS app with multi-tenant & RBAC.',
             version: '1.0.0',
         },
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                },
+            },
+        },
     },
     transform: jsonSchemaTransform,
 })
@@ -36,7 +47,7 @@ app.register(fastifySwaggerUi, {
 })
 
 app.register(fastifyJwt, {
-    secret: 'my-jwt-secret',
+    secret: env.JWT_SECRET,
 })
 
 app.register(fastifyCors)
@@ -49,6 +60,6 @@ app.register(getProfile)
 app.register(requestPasswordRecover)
 app.register(resetPassword)
 
-app.listen({ port: 3333 }).then(() => {
+app.listen({ port: env.PORT }).then(() => {
     console.log('HTTP server running!')
 })
