@@ -93,3 +93,10 @@ Authorization: Bearer {{token}}
 GET {{baseUrl}}/organizations
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+###
+
+# @name shutdown_organizations
+DELETE {{baseUrl}}/organizations/ascombet
+Content-Type: application/json
+Authorization: Bearer {{token}}
