@@ -1,5 +1,5 @@
 {
-    "[typescript][typescriptreact]": {
+    "[typescript][typescriptreact][javascript]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "biomejs.biome",
         "editor.codeActionsOnSave": {
