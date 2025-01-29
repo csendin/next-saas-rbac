@@ -3,13 +3,14 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
+import { signInWithEmailAndPassword } from './actions'
 
 export default function SignInPage() {
     return (
-        <form action="" className="flex flex-col gap-6">
+        <form action={signInWithEmailAndPassword} className="flex flex-col gap-6">
             <div className="grid gap-2">
                 <Label htmlFor="email">E-mail</Label>
-                <Input id="email" type="email" placeholder="m@example.com" required />
+                <Input name="email" id="email" type="email" placeholder="m@example.com" />
             </div>
 
             <div className="grid gap-2">
@@ -19,7 +20,7 @@ export default function SignInPage() {
                         Forgot your password?
                     </Link>
                 </div>
-                <Input id="password" type="password" required />
+                <Input name="password" id="password" type="password" />
             </div>
 
             <Button type="submit" className="w-full">
