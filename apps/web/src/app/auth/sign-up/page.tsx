@@ -4,30 +4,35 @@ import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
 
-export default function SignInPage() {
+export default function SignUpPage() {
     return (
         <form action="" className="flex flex-col gap-6">
+            <div className="grid gap-2">
+                <Label htmlFor="name">Name</Label>
+                <Input id="name" required />
+            </div>
+
             <div className="grid gap-2">
                 <Label htmlFor="email">E-mail</Label>
                 <Input id="email" type="email" placeholder="m@example.com" required />
             </div>
 
             <div className="grid gap-2">
-                <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
-                    <Link href="/auth/forgot-password" className="ml-auto text-sm underline-offset-4 hover:underline">
-                        Forgot your password?
-                    </Link>
-                </div>
+                <Label htmlFor="password">Password</Label>
                 <Input id="password" type="password" required />
             </div>
 
+            <div className="grid gap-2">
+                <Label htmlFor="password-confirmation">Confirm your password</Label>
+                <Input id="password-confirmation" type="password" required />
+            </div>
+
             <Button type="submit" className="w-full">
-                Sign in with e-mail
+                Create account
             </Button>
 
             <Button variant="link" className="w-full" size="sm" asChild>
-                <Link href="/auth/sign-up">Create new account</Link>
+                <Link href="/auth/sign-in">Already registered? Sign in</Link>
             </Button>
 
             <Separator />
@@ -39,7 +44,7 @@ export default function SignInPage() {
                         fill="currentColor"
                     />
                 </svg>
-                Sign in with GitHub
+                Sign up with GitHub
             </Button>
         </form>
     )
