@@ -2,6 +2,7 @@
 
 import { AlertTriangle, Loader2 } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
@@ -13,7 +14,11 @@ import { useFormState } from '@/hooks/use-form-state'
 import { signInWithEmailAndPassword } from './actions'
 
 export function SignInForm() {
-    const [{ errors, message, success }, handleSubmit, isPending] = useFormState(signInWithEmailAndPassword)
+    const router = useRouter()
+
+    const [{ errors, message, success }, handleSubmit, isPending] = useFormState(signInWithEmailAndPassword, () => {
+        router.push('/')
+    })
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">

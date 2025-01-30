@@ -6,7 +6,11 @@ interface FormState {
     errors: Record<string, string[]> | null
 }
 
-export function useFormState(action: (data: FormData) => Promise<FormState>, initialState?: FormState) {
+export function useFormState(
+    action: (data: FormData) => Promise<FormState>,
+    onSuccess?: () => Promise<void> | void,
+    initialState?: FormState
+) {
     const [isPending, startTransition] = useTransition()
 
     const [formState, setFormState] = useState(initialState ?? { success: false, message: null, errors: null })
@@ -19,6 +23,10 @@ export function useFormState(action: (data: FormData) => Promise<FormState>, ini
 
         startTransition(async () => {
             const state = await action(data)
+
+            if (state.success && onSuccess) {
+                await onSuccess()
+            }
 
             setFormState(state)
         })
