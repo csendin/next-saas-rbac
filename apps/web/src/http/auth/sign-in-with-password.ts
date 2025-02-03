@@ -6,7 +6,7 @@ interface SignInWithPasswordRequest {
 }
 
 interface SignInWithPasswordResponse {
-    accessToken: string
+    token: string
 }
 
 export async function signInWithPassword({ email, password }: SignInWithPasswordRequest) {
